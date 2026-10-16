@@ -29,6 +29,7 @@
     --gold: #d4b96a;
     --danger: #e74c6f;
     --frozen: #5a9ec2;
+    --green: #4ade80;
     --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -54,6 +55,7 @@
     --gold: #a8873a;
     --danger: #c25a6a;
     --frozen: #3a7a9e;
+    --green: #16a34a;
 }
 
 * { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; }
@@ -133,18 +135,8 @@ body::before {
 
 .auth-icon svg { width: 28px; height: 28px; }
 
-.auth-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-}
-
-.auth-sub {
-    font-size: 13px;
-    color: var(--text-3);
-    margin-bottom: 22px;
-}
+.auth-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.auth-sub { font-size: 13px; color: var(--text-3); margin-bottom: 22px; }
 
 .auth-field { margin-bottom: 10px; text-align: left; }
 
@@ -171,11 +163,7 @@ body::before {
     transition: all 0.2s;
 }
 
-.auth-input:focus {
-    border-color: var(--glass-border-hover);
-    background: var(--glass-2);
-}
-
+.auth-input:focus { border-color: var(--glass-border-hover); background: var(--glass-2); }
 .auth-input::placeholder { color: var(--text-4); }
 
 .auth-btn {
@@ -196,26 +184,9 @@ body::before {
 
 .auth-btn:hover { transform: scale(1.02); opacity: 0.9; }
 .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-.auth-switch {
-    margin-top: 16px;
-    font-size: 12px;
-    color: var(--text-3);
-}
-
-.auth-switch a {
-    color: var(--text);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.auth-error {
-    color: var(--danger);
-    font-size: 12px;
-    margin-top: 10px;
-    min-height: 16px;
-}
+.auth-switch { margin-top: 16px; font-size: 12px; color: var(--text-3); }
+.auth-switch a { color: var(--text); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.auth-error { color: var(--danger); font-size: 12px; margin-top: 10px; min-height: 16px; }
 
 /* ==================== APP ==================== */
 .app {
@@ -255,7 +226,6 @@ body::before {
 }
 
 .sidebar-logo span { color: var(--text-3); font-weight: 400; }
-
 .sidebar-actions { display: flex; gap: 6px; }
 
 .icon-btn {
@@ -302,15 +272,8 @@ body::before {
     position: relative;
 }
 
-.user-avatar.owner {
-    background: linear-gradient(135deg, var(--gold), #8a6d2a);
-    box-shadow: 0 0 15px rgba(212, 185, 106, 0.5);
-}
-
-.user-avatar.moderator {
-    background: linear-gradient(135deg, #4ade80, #16a34a);
-    box-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
-}
+.user-avatar.owner { background: linear-gradient(135deg, var(--gold), #8a6d2a); box-shadow: 0 0 15px rgba(212, 185, 106, 0.5); }
+.user-avatar.moderator { background: linear-gradient(135deg, var(--green), #16a34a); box-shadow: 0 0 12px rgba(74, 222, 128, 0.4); }
 
 .user-info-text { min-width: 0; flex: 1; }
 
@@ -340,9 +303,9 @@ body::before {
 .status-dot {
     width: 6px;
     height: 6px;
-    background: #4ade80;
+    background: var(--green);
     border-radius: 50%;
-    box-shadow: 0 0 8px #4ade80;
+    box-shadow: 0 0 8px var(--green);
 }
 
 .rooms-header {
@@ -354,11 +317,7 @@ body::before {
     font-weight: 600;
 }
 
-.rooms-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 12px 16px;
-}
+.rooms-list { flex: 1; overflow-y: auto; padding: 0 12px 16px; }
 
 .room-item {
     padding: 12px 14px;
@@ -464,6 +423,111 @@ body::before {
 
 .chat-header-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 
+/* Pinned message */
+.pinned-message {
+    padding: 10px 20px;
+    background: var(--glass-2);
+    border-bottom: 1px solid var(--glass-border);
+    display: none;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.pinned-message.active { display: flex; }
+
+.pinned-message-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--glass-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+.pinned-message-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.pinned-message-label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.pinned-message-text {
+    font-size: 12px;
+    color: var(--text-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pinned-message-close {
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.pinned-message-close:hover { background: var(--hover); color: var(--text); }
+
+/* Search bar */
+.search-bar {
+    padding: 10px 20px;
+    background: var(--glass-2);
+    border-bottom: 1px solid var(--glass-border);
+    display: none;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.search-bar.active { display: flex; }
+
+.search-bar input {
+    flex: 1;
+    padding: 8px 14px;
+    background: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.search-bar input:focus { border-color: var(--glass-border-hover); }
+
+.search-bar-close {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
 .chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -478,11 +542,39 @@ body::before {
 .chat-messages::-webkit-scrollbar-track { background: transparent; }
 .chat-messages::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
 
+/* Typing indicator */
+.typing-indicator {
+    padding: 0 24px 8px;
+    font-size: 12px;
+    color: var(--text-3);
+    font-style: italic;
+    min-height: 18px;
+    flex-shrink: 0;
+}
+
+.typing-indicator .dots {
+    display: inline-block;
+}
+
+.typing-indicator .dots::after {
+    content: '...';
+    animation: typingDots 1.5s infinite;
+}
+
+@keyframes typingDots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Message */
 .message {
     display: flex;
     gap: 10px;
     margin-bottom: 8px;
     animation: msgIn 0.3s ease;
+    position: relative;
+    user-select: none;
 }
 
 @keyframes msgIn {
@@ -508,23 +600,9 @@ body::before {
     cursor: pointer;
 }
 
-.msg-avatar.owner {
-    background: linear-gradient(135deg, var(--gold), #8a6d2a);
-    color: #fff;
-    border-color: var(--gold);
-}
-
-.msg-avatar.moderator {
-    background: linear-gradient(135deg, #4ade80, #16a34a);
-    color: #fff;
-    border-color: #4ade80;
-}
-
-.message.mine .msg-avatar {
-    background: linear-gradient(135deg, #4a7cff, #6a5acd);
-    color: #fff;
-    border-color: transparent;
-}
+.msg-avatar.owner { background: linear-gradient(135deg, var(--gold), #8a6d2a); color: #fff; border-color: var(--gold); }
+.msg-avatar.moderator { background: linear-gradient(135deg, var(--green), #16a34a); color: #fff; border-color: var(--green); }
+.message.mine .msg-avatar { background: linear-gradient(135deg, #4a7cff, #6a5acd); color: #fff; border-color: transparent; }
 
 .msg-bubble {
     max-width: 70%;
@@ -533,12 +611,125 @@ body::before {
     border: 1px solid var(--glass-border);
     border-radius: 14px;
     word-wrap: break-word;
+    cursor: pointer;
+    transition: background 0.15s;
 }
+
+.msg-bubble:hover { background: var(--glass-3); }
 
 .message.mine .msg-bubble {
     background: var(--my-msg);
     border-color: var(--my-msg-border);
 }
+
+/* Reply quote */
+.msg-reply {
+    padding: 6px 10px;
+    background: rgba(74, 124, 255, 0.1);
+    border-left: 3px solid #4a7cff;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--text-2);
+    cursor: pointer;
+}
+
+.msg-reply-author {
+    font-weight: 700;
+    color: #4a7cff;
+    margin-bottom: 2px;
+    font-size: 11px;
+}
+
+.msg-reply-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.8;
+}
+
+/* Message image */
+.msg-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+/* Message actions (floating) */
+.msg-actions {
+    position: absolute;
+    top: -14px;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border-hover);
+    border-radius: 20px;
+    padding: 4px 6px;
+    display: none;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.message:not(.mine) .msg-actions { left: 52px; }
+.message.mine .msg-actions { right: 52px; }
+
+.msg-actions.active { display: flex; }
+
+.msg-action {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s;
+    color: var(--text-2);
+}
+
+.msg-action:hover { background: var(--hover); transform: scale(1.15); }
+
+.msg-actions-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--glass-border);
+    margin: 0 2px;
+}
+
+/* Message reactions */
+.msg-reactions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.msg-reaction {
+    padding: 3px 8px;
+    background: var(--glass-3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+}
+
+.msg-reaction:hover { border-color: var(--glass-border-hover); transform: scale(1.05); }
+.msg-reaction.mine { background: rgba(74, 124, 255, 0.2); border-color: #4a7cff; }
+.msg-reaction-count { font-size: 11px; color: var(--text-2); font-weight: 600; }
 
 .msg-author {
     font-size: 11px;
@@ -550,8 +741,7 @@ body::before {
 }
 
 .msg-author.owner { color: var(--gold); }
-.msg-author.moderator { color: #4ade80; }
-
+.msg-author.moderator { color: var(--green); }
 .message.mine .msg-author { text-align: right; color: #6a5acd; }
 
 .msg-text {
@@ -562,11 +752,79 @@ body::before {
     word-break: break-word;
 }
 
-.msg-time {
+.msg-text .mention {
+    color: #4a7cff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.msg-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.msg-time { font-size: 10px; color: var(--text-4); }
+
+.msg-edited {
     font-size: 10px;
     color: var(--text-4);
-    margin-top: 4px;
-    text-align: right;
+    font-style: italic;
+}
+
+.msg-status {
+    font-size: 11px;
+    color: var(--text-4);
+}
+
+.msg-status.read { color: #4a7cff; }
+
+/* Reply preview in input */
+.reply-preview {
+    padding: 8px 12px;
+    background: var(--glass-2);
+    border-left: 3px solid #4a7cff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.reply-preview.active { display: flex; }
+
+.reply-preview-content { flex: 1; min-width: 0; }
+
+.reply-preview-author {
+    font-size: 11px;
+    font-weight: 700;
+    color: #4a7cff;
+    margin-bottom: 2px;
+}
+
+.reply-preview-text {
+    font-size: 12px;
+    color: var(--text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reply-preview-close {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
 }
 
 .chat-input-area {
@@ -581,6 +839,24 @@ body::before {
     gap: 8px;
     align-items: flex-end;
 }
+
+.chat-attach-btn {
+    width: 44px;
+    height: 44px;
+    background: var(--glass-2);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.chat-attach-btn:hover { border-color: var(--glass-border-hover); color: var(--text); }
+.chat-attach-btn svg { width: 18px; height: 18px; }
 
 .chat-input {
     flex: 1;
@@ -599,11 +875,7 @@ body::before {
     line-height: 1.4;
 }
 
-.chat-input:focus {
-    border-color: var(--glass-border-hover);
-    background: var(--glass-2);
-}
-
+.chat-input:focus { border-color: var(--glass-border-hover); background: var(--glass-2); }
 .chat-input::placeholder { color: var(--text-4); }
 
 .send-btn {
@@ -640,7 +912,6 @@ body::before {
 
 .empty-chat-icon { font-size: 48px; opacity: 0.3; margin-bottom: 8px; }
 
-/* FROZEN */
 .frozen-banner {
     padding: 10px 20px;
     background: rgba(90, 158, 194, 0.15);
@@ -654,7 +925,7 @@ body::before {
 
 .frozen-banner.active { display: block; }
 
-/* ==================== MOBILE TAB BAR ==================== */
+/* ==================== TAB BAR ==================== */
 .tab-bar {
     display: none;
     position: fixed;
@@ -691,25 +962,7 @@ body::before {
 }
 
 .tab-btn.active { color: var(--text); }
-
 .tab-btn svg { width: 22px; height: 22px; }
-
-.tab-btn .badge {
-    position: absolute;
-    top: 2px;
-    right: calc(50% - 16px);
-    background: var(--danger);
-    color: #fff;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 8px;
-    min-width: 14px;
-    text-align: center;
-    display: none;
-}
-
-.tab-btn .badge.active { display: block; }
 
 /* ==================== MODAL ==================== */
 .modal-overlay {
@@ -799,8 +1052,7 @@ body::before {
     font-weight: 500;
 }
 
-.field input,
-.field textarea {
+.field input, .field textarea {
     width: 100%;
     padding: 13px 15px;
     background: var(--input-bg);
@@ -815,15 +1067,8 @@ body::before {
 }
 
 .field textarea { min-height: 70px; }
-
-.field input:focus,
-.field textarea:focus {
-    border-color: var(--glass-border-hover);
-    background: var(--glass-2);
-}
-
-.field input::placeholder,
-.field textarea::placeholder { color: var(--text-4); }
+.field input:focus, .field textarea:focus { border-color: var(--glass-border-hover); background: var(--glass-2); }
+.field input::placeholder, .field textarea::placeholder { color: var(--text-4); }
 
 .modal-footer {
     padding: 12px 22px 18px;
@@ -851,18 +1096,41 @@ body::before {
 }
 
 .btn:hover { border-color: var(--glass-border-hover); background: var(--glass); }
-
 .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
 .btn.primary:hover { background: var(--text-2); border-color: var(--text-2); }
-
 .btn.danger { color: var(--danger); }
 .btn.danger:hover { border-color: var(--danger); background: rgba(231, 76, 111, 0.1); }
 
-/* ==================== PROFILE ==================== */
-.profile-header {
-    text-align: center;
-    margin-bottom: 22px;
+/* Reaction picker */
+.reaction-picker {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 8px 0;
 }
+
+.reaction-pick {
+    width: 44px;
+    height: 44px;
+    background: var(--glass-2);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: all 0.15s;
+}
+
+.reaction-pick:hover {
+    border-color: var(--glass-border-hover);
+    transform: scale(1.15);
+    background: var(--glass);
+}
+
+/* Profile */
+.profile-header { text-align: center; margin-bottom: 22px; }
 
 .profile-avatar {
     width: 90px;
@@ -887,9 +1155,9 @@ body::before {
 }
 
 .profile-avatar.moderator {
-    background: linear-gradient(135deg, #4ade80, #16a34a);
+    background: linear-gradient(135deg, var(--green), #16a34a);
     box-shadow: 0 0 25px rgba(74, 222, 128, 0.5);
-    border-color: #4ade80;
+    border-color: var(--green);
 }
 
 .profile-name {
@@ -903,12 +1171,7 @@ body::before {
     gap: 8px;
 }
 
-.profile-login {
-    font-size: 12px;
-    color: var(--text-3);
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
+.profile-login { font-size: 12px; color: var(--text-3); margin-bottom: 10px; letter-spacing: 1px; }
 
 .profile-role-badge {
     display: inline-block;
@@ -920,23 +1183,9 @@ body::before {
     text-transform: uppercase;
 }
 
-.profile-role-badge.owner {
-    background: rgba(212, 185, 106, 0.15);
-    color: var(--gold);
-    border: 1px solid var(--gold);
-}
-
-.profile-role-badge.moderator {
-    background: rgba(74, 222, 128, 0.15);
-    color: #4ade80;
-    border: 1px solid #4ade80;
-}
-
-.profile-role-badge.user {
-    background: var(--glass-2);
-    color: var(--text-3);
-    border: 1px solid var(--glass-border);
-}
+.profile-role-badge.owner { background: rgba(212, 185, 106, 0.15); color: var(--gold); border: 1px solid var(--gold); }
+.profile-role-badge.moderator { background: rgba(74, 222, 128, 0.15); color: var(--green); border: 1px solid var(--green); }
+.profile-role-badge.user { background: var(--glass-2); color: var(--text-3); border: 1px solid var(--glass-border); }
 
 .profile-bio {
     margin-top: 16px;
@@ -966,27 +1215,12 @@ body::before {
     text-align: center;
 }
 
-.profile-stat-value {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 2px;
-}
+.profile-stat-value { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.profile-stat-label { font-size: 10px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; }
 
-.profile-stat-label {
-    font-size: 10px;
-    color: var(--text-3);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
+.profile-actions { display: flex; gap: 8px; margin-top: 20px; }
 
-.profile-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 20px;
-}
-
-/* EMOJI PICKER */
+/* Emoji picker */
 .emoji-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -1007,17 +1241,10 @@ body::before {
     transition: all 0.15s;
 }
 
-.emoji-item:hover {
-    border-color: var(--glass-border-hover);
-    transform: scale(1.1);
-}
+.emoji-item:hover { border-color: var(--glass-border-hover); transform: scale(1.1); }
+.emoji-item.selected { border-color: var(--text); background: var(--glass); }
 
-.emoji-item.selected {
-    border-color: var(--text);
-    background: var(--glass);
-}
-
-/* USER SEARCH RESULT */
+/* User result */
 .user-result {
     padding: 14px;
     background: var(--glass-2);
@@ -1031,10 +1258,7 @@ body::before {
     transition: all 0.15s;
 }
 
-.user-result:hover {
-    border-color: var(--glass-border-hover);
-    background: var(--glass);
-}
+.user-result:hover { border-color: var(--glass-border-hover); background: var(--glass); }
 
 .user-result-avatar {
     width: 44px;
@@ -1050,7 +1274,7 @@ body::before {
 }
 
 .user-result-avatar.owner { background: linear-gradient(135deg, var(--gold), #8a6d2a); }
-.user-result-avatar.moderator { background: linear-gradient(135deg, #4ade80, #16a34a); }
+.user-result-avatar.moderator { background: linear-gradient(135deg, var(--green), #16a34a); }
 
 .user-result-info { flex: 1; min-width: 0; }
 
@@ -1066,13 +1290,30 @@ body::before {
     text-overflow: ellipsis;
 }
 
-.user-result-login {
-    font-size: 11px;
-    color: var(--text-3);
-    margin-top: 2px;
+.user-result-login { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+
+/* Image modal */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 800;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    cursor: pointer;
 }
 
-/* TOAST */
+.image-modal.active { display: flex; }
+
+.image-modal img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Toast */
 .toast {
     position: fixed;
     bottom: 100px;
@@ -1121,7 +1362,6 @@ body::before {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* MOBILE MENU (hamburger) */
 .mobile-menu-btn {
     display: none;
     width: 36px;
@@ -1138,7 +1378,6 @@ body::before {
 
 .mobile-menu-btn svg { width: 18px; height: 18px; }
 
-/* MOBILE DRAWER */
 .mobile-drawer {
     display: none;
     position: fixed;
@@ -1170,12 +1409,8 @@ body::before {
     to { transform: translateX(0); }
 }
 
-/* ==================== RESPONSIVE ==================== */
 @media (max-width: 800px) {
-    .app {
-        grid-template-columns: 1fr;
-        padding-bottom: calc(60px + var(--safe-bottom));
-    }
+    .app { grid-template-columns: 1fr; padding-bottom: calc(60px + var(--safe-bottom)); }
     .sidebar { display: none; }
     .tab-bar { display: flex; }
     .mobile-menu-btn { display: flex; }
@@ -1191,7 +1426,6 @@ body::before {
 </head>
 <body data-theme="dark">
 
-<!-- AUTH -->
 <div class="auth-screen" id="auth-screen">
     <div class="auth-card">
         <div class="auth-icon">
@@ -1222,7 +1456,6 @@ body::before {
     </div>
 </div>
 
-<!-- APP -->
 <div class="app" id="app" style="display: none;">
 
     <aside class="sidebar">
@@ -1252,7 +1485,7 @@ body::before {
             <div class="user-avatar" id="my-avatar">?</div>
             <div class="user-info-text">
                 <div class="user-info-name" id="my-name">Гость</div>
-                <div class="user-info-status"><span class="status-dot"></span> В сети</div>
+                <div class="user-info-status" id="my-status"><span class="status-dot"></span> В сети</div>
             </div>
         </div>
 
@@ -1274,14 +1507,48 @@ body::before {
                     <div class="chat-header-sub" id="chat-sub">Загрузка...</div>
                 </div>
             </div>
+            <button class="icon-btn" onclick="toggleSearchInChat()" title="Поиск">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="search-bar" id="chat-search-bar">
+            <input type="text" id="chat-search-input" placeholder="Поиск сообщений..." oninput="filterMessages(this.value)">
+            <button class="search-bar-close" onclick="toggleSearchInChat()">✕</button>
+        </div>
+
+        <div class="pinned-message" id="pinned-message">
+            <div class="pinned-message-icon">📌</div>
+            <div class="pinned-message-content">
+                <div class="pinned-message-label">Закреплено</div>
+                <div class="pinned-message-text" id="pinned-text"></div>
+            </div>
+            <button class="pinned-message-close" onclick="unpinMessage()" title="Открепить">✕</button>
         </div>
 
         <div class="chat-messages" id="chat-messages"></div>
+        <div class="typing-indicator" id="typing-indicator"></div>
 
         <div class="frozen-banner" id="frozen-banner">❄️ Вы заморожены. Можете читать, но не писать.</div>
 
         <div class="chat-input-area" id="chat-input-area">
+            <div class="reply-preview" id="reply-preview">
+                <div class="reply-preview-content">
+                    <div class="reply-preview-author" id="reply-author"></div>
+                    <div class="reply-preview-text" id="reply-text"></div>
+                </div>
+                <button class="reply-preview-close" onclick="cancelReply()">✕</button>
+            </div>
             <div class="chat-input-wrapper">
+                <button class="chat-attach-btn" onclick="openImageAttach()" title="Прикрепить картинку">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <path d="m21 15-5-5L5 21"/>
+                    </svg>
+                </button>
                 <textarea class="chat-input" id="chat-input" placeholder="Написать сообщение..." rows="1" autocomplete="off"></textarea>
                 <button class="send-btn" id="send-btn" onclick="sendMessage()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1294,15 +1561,14 @@ body::before {
 
 </div>
 
-<!-- TAB BAR (mobile) -->
 <div class="tab-bar" id="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('chats')">
+    <button class="tab-btn active" onclick="switchTab('chats', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
         Чаты
     </button>
-    <button class="tab-btn" onclick="switchTab('people')">
+    <button class="tab-btn" onclick="switchTab('people', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
             <circle cx="9" cy="7" r="4"/>
@@ -1311,23 +1577,22 @@ body::before {
         </svg>
         Люди
     </button>
-    <button class="tab-btn" onclick="switchTab('profile')">
+    <button class="tab-btn" onclick="switchTab('profile', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
         </svg>
         Профиль
     </button>
-    <button class="tab-btn" onclick="switchTab('settings')">
+    <button class="tab-btn" onclick="switchTab('rooms', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
-        Ещё
+        Комнаты
     </button>
 </div>
 
-<!-- MOBILE DRAWER -->
 <div class="mobile-drawer" id="mobile-drawer" onclick="if(event.target===this)closeMobileDrawer()">
     <div class="mobile-drawer-content">
         <div class="sidebar-header" style="padding: 16px 20px;">
@@ -1346,7 +1611,6 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: ROOM -->
 <div class="modal-overlay" id="modal-room">
     <div class="modal">
         <div class="modal-header">
@@ -1366,7 +1630,6 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: SETTINGS -->
 <div class="modal-overlay" id="modal-settings">
     <div class="modal">
         <div class="modal-header">
@@ -1380,7 +1643,6 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: EDIT PROFILE -->
 <div class="modal-overlay" id="modal-edit-profile">
     <div class="modal">
         <div class="modal-header">
@@ -1408,7 +1670,6 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: SEARCH PEOPLE -->
 <div class="modal-overlay" id="modal-search">
     <div class="modal">
         <div class="modal-header">
@@ -1425,7 +1686,6 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: VIEW PROFILE -->
 <div class="modal-overlay" id="modal-view-profile">
     <div class="modal">
         <div class="modal-header">
@@ -1436,7 +1696,40 @@ body::before {
     </div>
 </div>
 
-<!-- MODAL: ADMIN -->
+<div class="modal-overlay" id="modal-reactions">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">Реакция</div>
+            <button class="modal-close" onclick="closeModal('modal-reactions')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="reaction-picker" id="reaction-picker"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modal-image-attach">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">Прикрепить картинку</div>
+            <button class="modal-close" onclick="closeModal('modal-image-attach')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="field">
+                <label>Ссылка на картинку (URL)</label>
+                <input type="text" id="image-url" placeholder="https://example.com/image.jpg" autocomplete="off">
+            </div>
+            <div style="font-size: 11px; color: var(--text-3); margin-top: 8px;">
+                Вставь ссылку на картинку из интернета. Она появится в чате.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" onclick="closeModal('modal-image-attach')">Отмена</button>
+            <button class="btn primary" onclick="attachImage()">Отправить</button>
+        </div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="modal-admin">
     <div class="modal">
         <div class="modal-header">
@@ -1447,30 +1740,32 @@ body::before {
     </div>
 </div>
 
+<div class="image-modal" id="image-modal" onclick="closeImageModal()">
+    <img id="image-modal-img" src="">
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
 <script>
-// ==================== FIREBASE ====================
 var firebaseConfig = {
     apiKey: "AIzaSyB-n2wL94hvryB-56V9Mydna57qWJTaUDE",
     authDomain: "ssss-b2af1.firebaseapp.com",
     databaseURL: "https://ssss-b2af1-default-rtdb.firebaseio.com",
     projectId: "ssss-b2af1",
-    storageBucket: "ssss-b2af1.storage.app".replace('.storage.app', '.firebasestorage.app'),
+    storageBucket: "ssss-b2af1.firebasestorage.app",
     messagingSenderId: "992229397721",
     appId: "1:992229397721:web:7850439a92db4faa341ac8"
 };
 firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
-// ==================== КОНСТАНТЫ ====================
 var OWNER_PROMO = 'OWNER-1337-FOREVER';
 var EMOJIS = ['😎','🐱','🐶','🦊','🐼','🐯','🦁','🐸','🐧','🦉','🦄','🐲','👽','🤖','👻','💀','🎃','👑','⭐','🔥','💎','🌹','🎂','🍺','🚀','⚡','🌈','🍕','🎮','🎧','📚','🎨'];
+var REACTIONS = ['❤️', '👍', '😂', '🔥', '💯', '😮', '😢', '🎉'];
 
-// ==================== СОСТОЯНИЕ ====================
 var currentUser = null;
 var currentRoom = 'general';
 var rooms = [];
@@ -1480,31 +1775,33 @@ var myProfile = { displayName: '', avatar: '', bio: '' };
 var isFrozen = false;
 var authMode = 'login';
 var selectedEmoji = '';
+var selectedMessageForReaction = null;
+var replyingTo = null;
+var allMessages = [];
+var pinnedMessage = null;
+var currentSearchFilter = '';
 var roomsListener = null;
 var messagesListener = null;
 var usersListener = null;
 var bansListener = null;
 var rolesListener = null;
+var pinListener = null;
+var typingListener = null;
+var typingTimeout = null;
 var toastTimer = null;
+var isMineTyping = false;
 
-// ==================== STORAGE ====================
 var Storage = {
     get: function(key, fallback) {
-        try {
-            var v = localStorage.getItem(key);
-            return v !== null ? v : fallback;
-        } catch (e) { return fallback; }
+        try { var v = localStorage.getItem(key); return v !== null ? v : fallback; }
+        catch (e) { return fallback; }
     },
     set: function(key, value) {
-        try { localStorage.setItem(key, value); return true; }
-        catch (e) { return false; }
+        try { localStorage.setItem(key, value); return true; } catch (e) { return false; }
     },
-    remove: function(key) {
-        try { localStorage.removeItem(key); } catch (e) {}
-    }
+    remove: function(key) { try { localStorage.removeItem(key); } catch (e) {} }
 };
 
-// ==================== ХЕШ ПАРОЛЯ ====================
 function hashPassword(password) {
     var hash = 0;
     var str = 'salt_' + password + '_1337';
@@ -1516,7 +1813,6 @@ function hashPassword(password) {
     return 'h' + Math.abs(hash).toString(36);
 }
 
-// ==================== ТЕМА ====================
 function toggleTheme() {
     var current = document.body.getAttribute('data-theme');
     var next = current === 'dark' ? 'light' : 'dark';
@@ -1524,7 +1820,6 @@ function toggleTheme() {
     Storage.set('msgr_theme', next);
 }
 
-// ==================== TOAST ====================
 function showToast(msg, type) {
     var toast = document.getElementById('toast');
     if (!toast) return;
@@ -1534,7 +1829,6 @@ function showToast(msg, type) {
     toastTimer = setTimeout(function() { toast.className = 'toast'; }, 2500);
 }
 
-// ==================== МОДАЛКИ ====================
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 
@@ -1542,9 +1836,14 @@ document.addEventListener('click', function(e) {
     if (e.target.classList && e.target.classList.contains('modal-overlay')) {
         e.target.classList.remove('active');
     }
+    // Закрываем actions при клике вне
+    if (!e.target.closest('.msg-actions') && !e.target.closest('.msg-bubble')) {
+        var acts = document.querySelectorAll('.msg-actions.active');
+        for (var i = 0; i < acts.length; i++) acts[i].classList.remove('active');
+    }
 });
 
-// ==================== AUTH ====================
+// AUTH
 function switchAuthMode() {
     authMode = authMode === 'login' ? 'register' : 'login';
     updateAuthUI();
@@ -1598,7 +1897,6 @@ function submitAuth() {
                 btn.textContent = 'СОЗДАТЬ АККАУНТ';
                 return;
             }
-
             return userRef.set({
                 login: login,
                 password: hashPassword(password),
@@ -1616,20 +1914,9 @@ function submitAuth() {
                 enterApp();
             });
         } else {
-            if (!exists) {
-                errorEl.textContent = 'Аккаунт не найден';
-                btn.disabled = false;
-                btn.textContent = 'ВОЙТИ';
-                return;
-            }
-
+            if (!exists) { errorEl.textContent = 'Аккаунт не найден'; btn.disabled = false; btn.textContent = 'ВОЙТИ'; return; }
             var data = snapshot.val();
-            if (data.password !== hashPassword(password)) {
-                errorEl.textContent = 'Неверный пароль';
-                btn.disabled = false;
-                btn.textContent = 'ВОЙТИ';
-                return;
-            }
+            if (data.password !== hashPassword(password)) { errorEl.textContent = 'Неверный пароль'; btn.disabled = false; btn.textContent = 'ВОЙТИ'; return; }
 
             return db.ref('bans/' + login).once('value').then(function(banSnap) {
                 if (banSnap.exists()) {
@@ -1639,14 +1926,10 @@ function submitAuth() {
                     btn.textContent = 'ВОЙТИ';
                     return;
                 }
-
                 currentUser = login;
                 Storage.set('msgr_user', login);
                 Storage.set('msgr_pass', hashPassword(password));
-
-                return userRef.update({ online: true, lastSeen: Date.now() }).then(function() {
-                    enterApp();
-                });
+                return userRef.update({ online: true, lastSeen: Date.now() }).then(function() { enterApp(); });
             });
         }
     }).catch(function(e) {
@@ -1674,6 +1957,7 @@ function enterApp() {
 
     window.addEventListener('beforeunload', function() {
         userRef.update({ online: false, lastSeen: Date.now() });
+        if (typingTimeout) clearTimeout(typingTimeout);
     });
 
     setInterval(function() {
@@ -1687,6 +1971,7 @@ function enterApp() {
 function logout() {
     if (currentUser) {
         db.ref('accounts/' + currentUser).update({ online: false, lastSeen: Date.now() });
+        db.ref('typing/' + currentRoom + '/' + currentUser).remove();
     }
     currentUser = null;
     Storage.remove('msgr_user');
@@ -1697,6 +1982,8 @@ function logout() {
     if (usersListener) db.ref('accounts').off('value', usersListener);
     if (bansListener) db.ref('bans').off('value', bansListener);
     if (rolesListener) db.ref('roles').off('value', rolesListener);
+    if (pinListener) db.ref('pins/' + currentRoom).off('value', pinListener);
+    if (typingListener) db.ref('typing/' + currentRoom).off('value', typingListener);
 
     document.getElementById('auth-screen').style.display = 'flex';
     document.getElementById('app').style.display = 'none';
@@ -1708,7 +1995,7 @@ function logout() {
     showToast('Вы вышли');
 }
 
-// ==================== ПРОФИЛЬ ====================
+// PROFILE
 function loadMyProfile() {
     db.ref('accounts/' + currentUser).on('value', function(snap) {
         if (!snap.exists()) return;
@@ -1748,9 +2035,7 @@ function updateMyUI() {
         if (myRole === 'owner') drawerAvatar.classList.add('owner');
         else if (myRole === 'moderator') drawerAvatar.classList.add('moderator');
     }
-    if (drawerName) {
-        drawerName.innerHTML = escapeHtml(displayName) + icon;
-    }
+    if (drawerName) drawerName.innerHTML = escapeHtml(displayName) + icon;
 }
 
 function openMyProfile() {
@@ -1760,8 +2045,7 @@ function openMyProfile() {
 
 function renderMyProfile() {
     var accountCreated = allUsers[currentUser] && allUsers[currentUser].created
-        ? new Date(allUsers[currentUser].created).toLocaleDateString('ru-RU')
-        : '—';
+        ? new Date(allUsers[currentUser].created).toLocaleDateString('ru-RU') : '—';
 
     var avatarClass = 'profile-avatar';
     var roleClass = 'profile-role-badge';
@@ -1782,25 +2066,15 @@ function renderMyProfile() {
             '<div class="profile-login">@' + escapeHtml(currentUser) + '</div>' +
             '<div class="' + roleClass + '">' + roleText + '</div>' +
         '</div>' +
-
         (myProfile.bio ? '<div class="profile-bio">' + escapeHtml(myProfile.bio) + '</div>' : '') +
-
         '<div class="profile-stats">' +
-            '<div class="profile-stat">' +
-                '<div class="profile-stat-value">' + accountCreated + '</div>' +
-                '<div class="profile-stat-label">Регистрация</div>' +
-            '</div>' +
-            '<div class="profile-stat">' +
-                '<div class="profile-stat-value">' + (allUsers[currentUser] && allUsers[currentUser].gifts ? allUsers[currentUser].gifts.length : 0) + '</div>' +
-                '<div class="profile-stat-label">Подарков</div>' +
-            '</div>' +
+            '<div class="profile-stat"><div class="profile-stat-value">' + accountCreated + '</div><div class="profile-stat-label">Регистрация</div></div>' +
+            '<div class="profile-stat"><div class="profile-stat-value">' + (allUsers[currentUser] && allUsers[currentUser].gifts ? allUsers[currentUser].gifts.length : 0) + '</div><div class="profile-stat-label">Подарков</div></div>' +
         '</div>' +
-
         '<div class="profile-actions">' +
             '<button class="btn primary" onclick="openEditProfile()">✏️ Редактировать</button>' +
             (myRole === 'owner' || myRole === 'moderator' ? '<button class="btn" onclick="openAdminPanel()">🔨 Админ</button>' : '') +
         '</div>' +
-
         '<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--divider);">' +
             '<div style="font-size: 10px; color: var(--text-4); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Промокод</div>' +
             '<div style="display: flex; gap: 8px;">' +
@@ -1809,7 +2083,6 @@ function renderMyProfile() {
             '</div>' +
             '<div id="promo-status" style="font-size: 12px; min-height: 16px; margin-top: 8px;"></div>' +
         '</div>' +
-
         '<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--divider);">' +
             '<button class="btn" style="width: 100%;" onclick="toggleTheme()">🌓 Переключить тему</button>' +
         '</div>';
@@ -1823,7 +2096,6 @@ function openEditProfile() {
     document.getElementById('edit-bio').value = myProfile.bio || '';
     selectedEmoji = myProfile.avatar || '';
 
-    // Рендерим эмодзи
     var grid = document.getElementById('emoji-grid');
     var html = '';
     for (var i = 0; i < EMOJIS.length; i++) {
@@ -1831,7 +2103,6 @@ function openEditProfile() {
         html += '<div class="emoji-item' + (e === selectedEmoji ? ' selected' : '') + '" onclick="selectEmoji(\'' + e + '\')">' + e + '</div>';
     }
     grid.innerHTML = html;
-
     openModal('modal-edit-profile');
 }
 
@@ -1858,12 +2129,10 @@ function saveProfile() {
     }).then(function() {
         closeModal('modal-edit-profile');
         showToast('Профиль сохранён');
-    }).catch(function(e) {
-        showToast('Ошибка сохранения', 'error');
-    });
+    }).catch(function(e) { showToast('Ошибка', 'error'); });
 }
 
-// ==================== РОЛЬ / БАН ====================
+// ROLE / BAN
 function loadMyRole() {
     db.ref('roles/' + currentUser).on('value', function(snap) {
         myRole = snap.exists() ? snap.val() : 'user';
@@ -1888,13 +2157,11 @@ function loadMyBanStatus() {
 function loadAllUsers() {
     usersListener = db.ref('accounts').on('value', function(snap) {
         allUsers = {};
-        snap.forEach(function(child) {
-            allUsers[child.key] = child.val();
-        });
+        snap.forEach(function(child) { allUsers[child.key] = child.val(); });
     });
 }
 
-// ==================== КОМНАТЫ ====================
+// ROOMS
 function loadRooms() {
     if (roomsListener) db.ref('rooms').off('value', roomsListener);
 
@@ -1904,17 +2171,14 @@ function loadRooms() {
             rooms.push({
                 id: child.key,
                 name: child.val().name || child.key,
-                created: child.val().created || 0,
-                type: child.val().type || 'public'
+                created: child.val().created || 0
             });
         });
-
         rooms.sort(function(a, b) {
             if (a.id === 'general') return -1;
             if (b.id === 'general') return 1;
             return (a.created || 0) - (b.created || 0);
         });
-
         renderRooms();
         renderDrawerRooms();
     });
@@ -1922,14 +2186,12 @@ function loadRooms() {
 
 function renderRooms() {
     var list = document.getElementById('rooms-list');
-    if (!list) return;
-    list.innerHTML = renderRoomsHTML();
+    if (list) list.innerHTML = renderRoomsHTML();
 }
 
 function renderDrawerRooms() {
     var list = document.getElementById('drawer-rooms-list');
-    if (!list) return;
-    list.innerHTML = renderRoomsHTML();
+    if (list) list.innerHTML = renderRoomsHTML();
 }
 
 function renderRoomsHTML() {
@@ -1939,9 +2201,7 @@ function renderRoomsHTML() {
         var isActive = r.id === currentRoom;
         html += '<button class="room-item' + (isActive ? ' active' : '') + '" onclick="selectRoom(\'' + escapeAttr(r.id) + '\'); closeMobileDrawer();">' +
             '<div class="room-item-icon">' + escapeHtml(r.name.charAt(0).toUpperCase()) + '</div>' +
-            '<div class="room-item-info">' +
-                '<div class="room-item-name">' + escapeHtml(r.name) + '</div>' +
-            '</div>' +
+            '<div class="room-item-info"><div class="room-item-name">' + escapeHtml(r.name) + '</div></div>' +
         '</button>';
     }
     return html;
@@ -1949,6 +2209,8 @@ function renderRoomsHTML() {
 
 function selectRoom(roomId) {
     if (roomId === currentRoom) return;
+    // Убираем typing в старой комнате
+    db.ref('typing/' + currentRoom + '/' + currentUser).remove();
     currentRoom = roomId;
     renderRooms();
     renderDrawerRooms();
@@ -1962,6 +2224,8 @@ function selectRoom(roomId) {
         document.getElementById('chat-avatar').textContent = room.name.charAt(0).toUpperCase();
     }
     loadMessages(roomId);
+    loadPin(roomId);
+    setupTypingListener(roomId);
 }
 
 function openCreateRoom() {
@@ -1976,22 +2240,18 @@ function createRoom() {
     if (name.length > 30) { showToast('Максимум 30 символов', 'error'); return; }
 
     var roomId = sanitizeKey(name.toLowerCase()) + '_' + Date.now();
-
     db.ref('rooms/' + roomId).set({
         name: name,
         created: Date.now(),
-        createdBy: currentUser,
-        type: 'public'
+        createdBy: currentUser
     }).then(function() {
         closeModal('modal-room');
         showToast('Комната создана');
         selectRoom(roomId);
-    }).catch(function(e) {
-        showToast('Ошибка', 'error');
-    });
+    }).catch(function(e) { showToast('Ошибка', 'error'); });
 }
 
-// ==================== СООБЩЕНИЯ ====================
+// MESSAGES
 function loadMessages(roomId) {
     if (messagesListener) db.ref('messages/' + currentRoom).off('value', messagesListener);
 
@@ -1999,43 +2259,56 @@ function loadMessages(roomId) {
     container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
 
     messagesListener = db.ref('messages/' + roomId).limitToLast(100).on('value', function(snapshot) {
-        var messages = [];
+        allMessages = [];
         snapshot.forEach(function(child) {
             var val = child.val();
-            messages.push({
+            allMessages.push({
                 id: child.key,
                 author: val.author || 'Аноним',
                 text: val.text || '',
-                time: val.time || 0
+                time: val.time || 0,
+                imageUrl: val.imageUrl || '',
+                replyTo: val.replyTo || null,
+                reactions: val.reactions || {},
+                edited: val.edited || false
             });
         });
-        renderMessages(messages);
+        renderMessages();
     });
 
     db.ref('accounts').on('value', function(snap) {
         var online = 0;
-        snap.forEach(function(child) {
-            if (child.val().online) online++;
-        });
+        snap.forEach(function(child) { if (child.val().online) online++; });
         document.getElementById('chat-sub').textContent = online + ' онлайн';
     });
+
+    loadPin(roomId);
+    setupTypingListener(roomId);
 }
 
-function renderMessages(messages) {
+function renderMessages() {
     var container = document.getElementById('chat-messages');
     if (!container) return;
 
-    if (messages.length === 0) {
-        container.innerHTML = '<div class="empty-chat"><div class="empty-chat-icon">💬</div><div>Пока пусто</div></div>';
+    var filtered = allMessages;
+    if (currentSearchFilter) {
+        var q = currentSearchFilter.toLowerCase();
+        filtered = allMessages.filter(function(m) {
+            return m.text.toLowerCase().indexOf(q) !== -1;
+        });
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="empty-chat"><div class="empty-chat-icon">💬</div><div>' + (currentSearchFilter ? 'Ничего не найдено' : 'Пока пусто') + '</div></div>';
         return;
     }
 
     var html = '';
-    for (var i = 0; i < messages.length; i++) {
-        var m = messages[i];
+    for (var i = 0; i < filtered.length; i++) {
+        var m = filtered[i];
         var isMine = m.author === currentUser;
-        var authorRole = (m.author === currentUser) ? myRole : (allUsers[m.author] ? (allUsers[m.author].role || 'user') : 'user');
         var authorData = allUsers[m.author] || {};
+        var authorRole = (m.author === currentUser) ? myRole : (authorData.role || 'user');
         var displayName = authorData.displayName || m.author;
         var avatar = authorData.avatar || m.author.charAt(0).toUpperCase();
 
@@ -2046,17 +2319,88 @@ function renderMessages(messages) {
         if (authorRole === 'owner') { avatarClass += ' owner'; authorClass += ' owner'; roleIcon = ' 👑'; }
         else if (authorRole === 'moderator') { avatarClass += ' moderator'; authorClass += ' moderator'; roleIcon = ' ⭐'; }
 
-        html += '<div class="message' + (isMine ? ' mine' : '') + '">' +
-            '<div class="' + avatarClass + '" onclick="viewProfile(\'' + escapeAttr(m.author) + '\')">' + escapeHtml(avatar) + '</div>' +
+        // Reply preview
+        var replyHtml = '';
+        if (m.replyTo && m.replyTo.id) {
+            var replyAuthor = allUsers[m.replyTo.author] ? (allUsers[m.replyTo.author].displayName || m.replyTo.author) : m.replyTo.author;
+            replyHtml = '<div class="msg-reply" onclick="scrollToMessage(\'' + escapeAttr(m.replyTo.id) + '\')">' +
+                '<div class="msg-reply-author">' + escapeHtml(replyAuthor) + '</div>' +
+                '<div class="msg-reply-text">' + escapeHtml(m.replyTo.text) + '</div>' +
+            '</div>';
+        }
+
+        // Image
+        var imageHtml = '';
+        if (m.imageUrl) {
+            imageHtml = '<img class="msg-image" src="' + escapeAttr(m.imageUrl) + '" onclick="event.stopPropagation();openImageModal(\'' + escapeAttr(m.imageUrl) + '\')" onerror="this.style.display=\'none\'">';
+        }
+
+        // Reactions
+        var reactionsHtml = '';
+        var reactionKeys = Object.keys(m.reactions || {});
+        if (reactionKeys.length > 0) {
+            var counts = {};
+            for (var k = 0; k < reactionKeys.length; k++) {
+                var r = m.reactions[reactionKeys[k]];
+                if (!counts[r]) counts[r] = [];
+                counts[r].push(reactionKeys[k]);
+            }
+            reactionsHtml = '<div class="msg-reactions">';
+            for (var emoji in counts) {
+                var users = counts[emoji];
+                var isMineReaction = users.indexOf(currentUser) !== -1;
+                reactionsHtml += '<div class="msg-reaction' + (isMineReaction ? ' mine' : '') + '" onclick="event.stopPropagation();toggleReaction(\'' + escapeAttr(m.id) + '\', \'' + emoji + '\')">' +
+                    emoji + ' <span class="msg-reaction-count">' + users.length + '</span>' +
+                '</div>';
+            }
+            reactionsHtml += '</div>';
+        }
+
+        // Read status
+        var readStatus = '';
+        if (isMine) {
+            readStatus = '<span class="msg-status">✓✓</span>';
+        }
+
+        // Actions
+        var canDelete = isMine || myRole === 'owner' || myRole === 'moderator';
+        var actionsHtml = '<div class="msg-actions" id="actions-' + m.id + '">' +
+            '<button class="msg-action" onclick="event.stopPropagation();openReactionPicker(\'' + escapeAttr(m.id) + '\')" title="Реакция">😊</button>' +
+            '<button class="msg-action" onclick="event.stopPropagation();startReply(\'' + escapeAttr(m.id) + '\')" title="Ответить">↩️</button>' +
+            (myRole === 'owner' || myRole === 'moderator' ? '<button class="msg-action" onclick="event.stopPropagation();pinMessage(\'' + escapeAttr(m.id) + '\')" title="Закрепить">📌</button>' : '') +
+            (canDelete ? '<div class="msg-actions-divider"></div><button class="msg-action" onclick="event.stopPropagation();deleteMessage(\'' + escapeAttr(m.id) + '\')" title="Удалить">🗑️</button>' : '') +
+        '</div>';
+
+        html += '<div class="message' + (isMine ? ' mine' : '') + '" id="msg-' + m.id + '" onclick="toggleActions(\'' + m.id + '\')">' +
+            '<div class="' + avatarClass + '" onclick="event.stopPropagation();viewProfile(\'' + escapeAttr(m.author) + '\')">' + escapeHtml(avatar) + '</div>' +
             '<div class="msg-bubble">' +
-                (isMine ? '' : '<span class="' + authorClass + '" onclick="viewProfile(\'' + escapeAttr(m.author) + '\')">' + escapeHtml(displayName) + roleIcon + '</span><br>') +
-                '<div class="msg-text">' + escapeHtml(m.text) + '</div>' +
-                '<div class="msg-time">' + formatTime(m.time) + '</div>' +
+                actionsHtml +
+                (isMine ? '' : '<span class="' + authorClass + '" onclick="event.stopPropagation();viewProfile(\'' + escapeAttr(m.author) + '\')">' + escapeHtml(displayName) + roleIcon + '</span><br>') +
+                replyHtml +
+                imageHtml +
+                '<div class="msg-text">' + escapeHtml(m.text) + (m.edited ? ' <span class="msg-edited">(изм.)</span>' : '') + '</div>' +
+                reactionsHtml +
+                '<div class="msg-footer">' +
+                    readStatus +
+                    '<span class="msg-time">' + formatTime(m.time) + '</span>' +
+                '</div>' +
             '</div>' +
         '</div>';
     }
     container.innerHTML = html;
     container.scrollTop = container.scrollHeight;
+}
+
+function toggleActions(msgId) {
+    var all = document.querySelectorAll('.msg-actions.active');
+    var current = document.getElementById('actions-' + msgId);
+    var wasActive = current && current.classList.contains('active');
+
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+
+    if (!wasActive && current) {
+        current.classList.add('active');
+    }
 }
 
 function sendMessage() {
@@ -2069,14 +2413,28 @@ function sendMessage() {
     var sendBtn = document.getElementById('send-btn');
     sendBtn.disabled = true;
 
-    db.ref('messages/' + currentRoom).push({
+    var msg = {
         author: currentUser,
         text: text,
         time: Date.now()
-    }).then(function() {
+    };
+
+    if (replyingTo) {
+        msg.replyTo = {
+            id: replyingTo.id,
+            author: replyingTo.author,
+            text: replyingTo.text.substring(0, 100)
+        };
+    }
+
+    db.ref('messages/' + currentRoom).push(msg).then(function() {
         input.value = '';
         input.style.height = 'auto';
         sendBtn.disabled = false;
+        cancelReply();
+        // Убираем typing
+        db.ref('typing/' + currentRoom + '/' + currentUser).remove();
+        isMineTyping = false;
         input.focus();
     }).catch(function(e) {
         showToast('Ошибка', 'error');
@@ -2084,6 +2442,225 @@ function sendMessage() {
     });
 }
 
+function attachImage() {
+    var url = document.getElementById('image-url').value.trim();
+    if (!url) { showToast('Введи ссылку', 'error'); return; }
+    if (!/^https?:\/\//i.test(url)) { showToast('Ссылка должна начинаться с http', 'error'); return; }
+
+    var text = document.getElementById('chat-input').value.trim();
+
+    var msg = {
+        author: currentUser,
+        text: text || '🖼️ Картинка',
+        time: Date.now(),
+        imageUrl: url
+    };
+
+    if (replyingTo) {
+        msg.replyTo = {
+            id: replyingTo.id,
+            author: replyingTo.author,
+            text: replyingTo.text.substring(0, 100)
+        };
+    }
+
+    db.ref('messages/' + currentRoom).push(msg).then(function() {
+        document.getElementById('image-url').value = '';
+        document.getElementById('chat-input').value = '';
+        closeModal('modal-image-attach');
+        cancelReply();
+        showToast('Отправлено');
+    }).catch(function() { showToast('Ошибка', 'error'); });
+}
+
+function openImageAttach() {
+    document.getElementById('image-url').value = '';
+    openModal('modal-image-attach');
+    setTimeout(function() { document.getElementById('image-url').focus(); }, 100);
+}
+
+function deleteMessage(msgId) {
+    if (!confirm('Удалить сообщение?')) return;
+    db.ref('messages/' + currentRoom + '/' + msgId).remove().then(function() {
+        showToast('Удалено');
+    });
+}
+
+function startReply(msgId) {
+    var msg = null;
+    for (var i = 0; i < allMessages.length; i++) {
+        if (allMessages[i].id === msgId) { msg = allMessages[i]; break; }
+    }
+    if (!msg) return;
+
+    replyingTo = msg;
+    var authorName = allUsers[msg.author] ? (allUsers[msg.author].displayName || msg.author) : msg.author;
+
+    document.getElementById('reply-author').textContent = authorName;
+    document.getElementById('reply-text').textContent = msg.text.substring(0, 80);
+    document.getElementById('reply-preview').classList.add('active');
+
+    // Закрываем actions
+    var acts = document.querySelectorAll('.msg-actions.active');
+    for (var i = 0; i < acts.length; i++) acts[i].classList.remove('active');
+
+    document.getElementById('chat-input').focus();
+}
+
+function cancelReply() {
+    replyingTo = null;
+    document.getElementById('reply-preview').classList.remove('active');
+}
+
+function scrollToMessage(msgId) {
+    var el = document.getElementById('msg-' + msgId);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.transition = 'background 0.5s';
+        el.style.background = 'rgba(74, 124, 255, 0.15)';
+        setTimeout(function() { el.style.background = ''; }, 1000);
+    }
+}
+
+// REACTIONS
+function openReactionPicker(msgId) {
+    selectedMessageForReaction = msgId;
+    var picker = document.getElementById('reaction-picker');
+    var html = '';
+    for (var i = 0; i < REACTIONS.length; i++) {
+        html += '<div class="reaction-pick" onclick="addReaction(\'' + REACTIONS[i] + '\')">' + REACTIONS[i] + '</div>';
+    }
+    picker.innerHTML = html;
+    openModal('modal-reactions');
+
+    // Закрываем actions
+    var acts = document.querySelectorAll('.msg-actions.active');
+    for (var i = 0; i < acts.length; i++) acts[i].classList.remove('active');
+}
+
+function addReaction(emoji) {
+    if (!selectedMessageForReaction) return;
+    toggleReaction(selectedMessageForReaction, emoji);
+    closeModal('modal-reactions');
+    selectedMessageForReaction = null;
+}
+
+function toggleReaction(msgId, emoji) {
+    var ref = db.ref('messages/' + currentRoom + '/' + msgId + '/reactions/' + currentUser);
+    ref.once('value').then(function(snap) {
+        if (snap.exists() && snap.val() === emoji) {
+            ref.remove();
+        } else {
+            ref.set(emoji);
+        }
+    });
+}
+
+// PIN
+function loadPin(roomId) {
+    if (pinListener) db.ref('pins/' + currentRoom).off('value', pinListener);
+
+    pinListener = db.ref('pins/' + roomId).on('value', function(snap) {
+        if (snap.exists()) {
+            pinnedMessage = snap.val();
+            document.getElementById('pinned-text').textContent = pinnedMessage.text || '';
+            document.getElementById('pinned-message').classList.add('active');
+        } else {
+            pinnedMessage = null;
+            document.getElementById('pinned-message').classList.remove('active');
+        }
+    });
+}
+
+function pinMessage(msgId) {
+    var msg = null;
+    for (var i = 0; i < allMessages.length; i++) {
+        if (allMessages[i].id === msgId) { msg = allMessages[i]; break; }
+    }
+    if (!msg) return;
+
+    db.ref('pins/' + currentRoom).set({
+        id: msg.id,
+        text: msg.text.substring(0, 150),
+        author: msg.author
+    }).then(function() {
+        showToast('Закреплено');
+    });
+}
+
+function unpinMessage() {
+    if (myRole !== 'owner' && myRole !== 'moderator') {
+        showToast('Только модераторы могут открепить', 'error');
+        return;
+    }
+    db.ref('pins/' + currentRoom).remove().then(function() {
+        showToast('Откреплено');
+    });
+}
+
+// SEARCH IN CHAT
+function toggleSearchInChat() {
+    var bar = document.getElementById('chat-search-bar');
+    if (bar.classList.contains('active')) {
+        bar.classList.remove('active');
+        currentSearchFilter = '';
+        document.getElementById('chat-search-input').value = '';
+        renderMessages();
+    } else {
+        bar.classList.add('active');
+        setTimeout(function() { document.getElementById('chat-search-input').focus(); }, 100);
+    }
+}
+
+function filterMessages(query) {
+    currentSearchFilter = query;
+    renderMessages();
+}
+
+// TYPING
+function setupTypingListener(roomId) {
+    if (typingListener) db.ref('typing/' + currentRoom).off('value', typingListener);
+
+    typingListener = db.ref('typing/' + roomId).on('value', function(snap) {
+        var typing = [];
+        snap.forEach(function(child) {
+            if (child.key !== currentUser && child.val().typing) {
+                typing.push(child.key);
+            }
+        });
+
+        var indicator = document.getElementById('typing-indicator');
+        if (typing.length === 0) {
+            indicator.textContent = '';
+        } else {
+            var names = typing.map(function(login) {
+                return allUsers[login] ? (allUsers[login].displayName || login) : login;
+            });
+            if (names.length === 1) {
+                indicator.innerHTML = escapeHtml(names[0]) + ' печатает<span class="dots"></span>';
+            } else if (names.length === 2) {
+                indicator.innerHTML = escapeHtml(names[0]) + ' и ' + escapeHtml(names[1]) + ' печатают<span class="dots"></span>';
+            } else {
+                indicator.innerHTML = 'Несколько человек печатают<span class="dots"></span>';
+            }
+        }
+    });
+}
+
+function sendTyping() {
+    if (!currentUser || !currentRoom) return;
+    if (!isMineTyping) {
+        isMineTyping = true;
+        db.ref('typing/' + currentRoom + '/' + currentUser).set({ typing: true, time: Date.now() });
+    }
+    if (typingTimeout) clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(function() {
+        isMineTyping = false;
+        db.ref('typing/' + currentRoom + '/' + currentUser).remove();
+    }, 3000);
+}
+
+// INPUT
 function setupInputHandlers() {
     var input = document.getElementById('chat-input');
     if (!input) return;
@@ -2098,6 +2675,7 @@ function setupInputHandlers() {
     input.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        sendTyping();
     });
 
     document.getElementById('auth-login').addEventListener('keydown', function(e) {
@@ -2112,9 +2690,12 @@ function setupInputHandlers() {
     document.getElementById('search-login').addEventListener('input', function() {
         searchPeople(this.value.trim());
     });
+    document.getElementById('image-url').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') attachImage();
+    });
 }
 
-// ==================== ПОИСК ЛЮДЕЙ ====================
+// SEARCH PEOPLE
 function openSearch() {
     document.getElementById('search-login').value = '';
     document.getElementById('search-results').innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-3); font-size: 12px;">Введи логин для поиска</div>';
@@ -2158,19 +2739,17 @@ function searchPeople(query) {
             '<div class="' + avatarClass + '">' + escapeHtml(avatar) + '</div>' +
             '<div class="user-result-info">' +
                 '<div class="user-result-name">' + escapeHtml(displayName) + icon + '</div>' +
-                '<div class="user-result-login">@' + escapeHtml(u.login) + '</div>' +
+                '<div class="user-result-login">@' + escapeHtml(u.login) + ' · ' + (u.data.online ? '🟢 в сети' : '⚫ не в сети') + '</div>' +
             '</div>' +
         '</div>';
     }
     results.innerHTML = html;
 }
 
-// ==================== ПРОСМОТР ПРОФИЛЯ ====================
+// VIEW PROFILE
 function viewProfile(login) {
-    if (!login || login === currentUser) {
-        if (login === currentUser) { openMyProfile(); }
-        return;
-    }
+    if (!login) return;
+    if (login === currentUser) { openMyProfile(); return; }
 
     var user = allUsers[login];
     if (!user) { showToast('Профиль не найден', 'error'); return; }
@@ -2197,29 +2776,21 @@ function viewProfile(login) {
             '<div class="profile-name">' + escapeHtml(displayName) + (roleIcon ? ' ' + roleIcon : '') + '</div>' +
             '<div class="profile-login">@' + escapeHtml(login) + '</div>' +
             '<div class="' + roleClass + '">' + roleText + '</div>' +
-            '<div style="margin-top: 10px; font-size: 12px; color: ' + (user.online ? '#4ade80' : 'var(--text-3)') + ';">' +
+            '<div style="margin-top: 10px; font-size: 12px; color: ' + (user.online ? 'var(--green)' : 'var(--text-3)') + ';">' +
                 (user.online ? '🟢 В сети' : '⚫ Был(а) ' + lastSeen) +
             '</div>' +
         '</div>' +
-
         (user.bio ? '<div class="profile-bio">' + escapeHtml(user.bio) + '</div>' : '') +
-
         '<div class="profile-stats">' +
-            '<div class="profile-stat">' +
-                '<div class="profile-stat-value">' + accountCreated + '</div>' +
-                '<div class="profile-stat-label">Регистрация</div>' +
-            '</div>' +
-            '<div class="profile-stat">' +
-                '<div class="profile-stat-value">' + (user.gifts ? user.gifts.length : 0) + '</div>' +
-                '<div class="profile-stat-label">Подарков</div>' +
-            '</div>' +
+            '<div class="profile-stat"><div class="profile-stat-value">' + accountCreated + '</div><div class="profile-stat-label">Регистрация</div></div>' +
+            '<div class="profile-stat"><div class="profile-stat-value">' + (user.gifts ? user.gifts.length : 0) + '</div><div class="profile-stat-label">Подарков</div></div>' +
         '</div>';
 
     document.getElementById('view-profile-body').innerHTML = html;
     openModal('modal-view-profile');
 }
 
-// ==================== ПРОМОКОД ====================
+// PROMO
 function applyPromo() {
     var input = document.getElementById('promo-input');
     var status = document.getElementById('promo-status');
@@ -2243,7 +2814,7 @@ function applyPromo() {
     status.textContent = 'Неверный промокод';
 }
 
-// ==================== АДМИН-ПАНЕЛЬ ====================
+// ADMIN
 function openAdminPanel() {
     closeModal('modal-settings');
     openModal('modal-admin');
@@ -2251,7 +2822,6 @@ function openAdminPanel() {
 
     if (bansListener) db.ref('bans').off('value', bansListener);
     if (rolesListener) db.ref('roles').off('value', rolesListener);
-
     bansListener = db.ref('bans').on('value', function() { renderAdminPanel(); });
     rolesListener = db.ref('roles').on('value', function() { renderAdminPanel(); });
 }
@@ -2261,19 +2831,13 @@ function renderAdminPanel() {
     if (!body) return;
 
     var userKeys = Object.keys(allUsers);
-    if (userKeys.length === 0) {
-        body.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-        return;
-    }
+    if (userKeys.length === 0) { body.innerHTML = '<div class="loading"><div class="spinner"></div></div>'; return; }
 
     db.ref('bans').once('value').then(function(bansSnap) {
         var bans = bansSnap.val() || {};
-
         db.ref('roles').once('value').then(function(rolesSnap) {
             var roles = rolesSnap.val() || {};
-
             var html = '<div style="font-size: 11px; color: var(--text-3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;">Пользователи (' + userKeys.length + ')</div>';
-
             userKeys.sort();
 
             for (var i = 0; i < userKeys.length; i++) {
@@ -2288,12 +2852,10 @@ function renderAdminPanel() {
 
                 if (role === 'owner') { avatarClass += ' owner'; roleIcon = '👑'; roleLabel = 'Основатель'; }
                 else if (role === 'moderator') { avatarClass += ' moderator'; roleIcon = '⭐'; roleLabel = 'Модератор'; }
-
                 if (isBanned) roleLabel += ' · 🚫 Забанен';
 
                 var isMe = login === currentUser;
                 var canModerate = (myRole === 'owner' || myRole === 'moderator') && !isMe && role !== 'owner';
-
                 var avatar = user.avatar || login.charAt(0).toUpperCase();
 
                 html += '<div class="user-result">' +
@@ -2319,10 +2881,8 @@ function renderAdminPanel() {
                     }
                     html += '</div>';
                 }
-
                 html += '</div>';
             }
-
             body.innerHTML = html;
         });
     });
@@ -2331,12 +2891,7 @@ function renderAdminPanel() {
 function banUser(login) {
     var reason = prompt('Причина бана для ' + login + ':', 'Нарушение правил');
     if (reason === null) return;
-
-    db.ref('bans/' + login).set({
-        reason: reason,
-        by: currentUser,
-        time: Date.now()
-    }).then(function() {
+    db.ref('bans/' + login).set({ reason: reason, by: currentUser, time: Date.now() }).then(function() {
         showToast(login + ' забанен', 'error');
         renderAdminPanel();
     });
@@ -2353,46 +2908,39 @@ function unbanUser(login) {
 function setRole(login, role) {
     if (role === 'user') {
         if (!confirm('Снять модератора с ' + login + '?')) return;
-        db.ref('roles/' + login).remove().then(function() {
-            showToast('Роль снята');
-            renderAdminPanel();
-        });
+        db.ref('roles/' + login).remove().then(function() { showToast('Роль снята'); renderAdminPanel(); });
     } else {
         if (!confirm('Выдать ' + role + ' для ' + login + '?')) return;
-        db.ref('roles/' + login).set(role).then(function() {
-            showToast('Роль выдана');
-            renderAdminPanel();
-        });
+        db.ref('roles/' + login).set(role).then(function() { showToast('Роль выдана'); renderAdminPanel(); });
     }
 }
 
-// ==================== МОБИЛЬНЫЙ DRAWER ====================
-function openMobileDrawer() {
-    document.getElementById('mobile-drawer').classList.add('active');
-}
-function closeMobileDrawer() {
-    document.getElementById('mobile-drawer').classList.remove('active');
-}
+// MOBILE
+function openMobileDrawer() { document.getElementById('mobile-drawer').classList.add('active'); }
+function closeMobileDrawer() { document.getElementById('mobile-drawer').classList.remove('active'); }
 
-// ==================== TAB BAR ====================
-function switchTab(tab) {
+function switchTab(tab, event) {
     var btns = document.querySelectorAll('.tab-btn');
     for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-    event.currentTarget.classList.add('active');
+    if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    if (tab === 'chats') {
-        // Показываем чат
-    } else if (tab === 'people') {
-        openSearch();
-    } else if (tab === 'profile') {
-        openMyProfile();
-    } else if (tab === 'settings') {
-        // Открываем мобильный drawer с комнатами
-        openMobileDrawer();
-    }
+    if (tab === 'chats') { /* уже тут */ }
+    else if (tab === 'people') { openSearch(); }
+    else if (tab === 'profile') { openMyProfile(); }
+    else if (tab === 'rooms') { openMobileDrawer(); }
 }
 
-// ==================== UTILS ====================
+// IMAGE MODAL
+function openImageModal(url) {
+    document.getElementById('image-modal-img').src = url;
+    document.getElementById('image-modal').classList.add('active');
+}
+
+function closeImageModal() {
+    document.getElementById('image-modal').classList.remove('active');
+}
+
+// UTILS
 function formatTime(ts) {
     if (!ts) return '';
     var d = new Date(ts);
@@ -2420,7 +2968,7 @@ function sanitizeKey(key) {
     return String(key).replace(/[.#$\/\[\]]/g, '_');
 }
 
-// ==================== ИНИЦИАЛИЗАЦИЯ ====================
+// INIT
 function init() {
     var savedTheme = Storage.get('msgr_theme', 'dark');
     document.body.setAttribute('data-theme', savedTheme);
